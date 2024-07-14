@@ -5,6 +5,11 @@
 
 import enquirer_default from 'enquirer';
 import {python} from 'pythonia';
+import {dirname, join} from 'path';
+import {fileURLToPath} from 'url';
+
+// Get the path of the directory where this file is located.
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // Gracefully shut down python before exiting.
 process.on('exit', () => {
@@ -16,6 +21,7 @@ process.on('exit', () => {
 });
 
 // Obtain references to the libraries we need.
+await (await python('sys')).path.append(join(__dirname, '..', 'pylib'));
 const pyhiveapi = await python('pyhiveapi');
 const {prompt} = enquirer_default;
 
