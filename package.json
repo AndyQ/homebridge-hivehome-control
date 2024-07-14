@@ -22,7 +22,7 @@
     "watch": "npm run build && npm link && nodemon",
     "build": "rimraf ./dist && tsc",
     "prepublishOnly": "npm run lint && npm run build",
-    "postinstall": "python3 -m pip install git+https://github.com/gormanb/Pyhiveapi.git@v0.5.16.1"
+    "postinstall": "python3 -m pip install git+https://github.com/gormanb/Pyhiveapi.git@v0.5.16.1 --target pylib --upgrade"
   },
   "keywords": [
     "homebridge-plugin",

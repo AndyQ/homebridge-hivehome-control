@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable indent */
 import {PlatformConfig} from 'homebridge';
+import {join} from 'path';
 import {python} from 'pythonia';
 
 import {Log} from '../util/log';
@@ -18,7 +19,11 @@ export function translateModeForRequest(mode: HeatingMode) {
 
 // Start a new Hive session using pyhiveapi.
 export async function startHiveSession(config: PlatformConfig) {
+  // Add our local pylib directory to the python path and import pyhiveapi.
+  await (await python('sys')).path.append(join(__dirname, '..', '..', 'pylib'));
   const pyhiveapi = await python('pyhiveapi');
+
+  // Start the Hive session with the specified username and password.
   const hiveSession = await pyhiveapi.Hive$({
     username: config.hiveUsername,
     password: config.hivePassword,
