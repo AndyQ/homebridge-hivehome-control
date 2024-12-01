@@ -52,7 +52,7 @@ export class HiveHotWaterAccessory extends HiveAccessory {
         .onGet(() => this.currentState[this.kManualName] === HeatingMode.kOn)
         .onSet(
             (active) => this.setDeviceState(
-                this.kManualName, active ? HeatingMode.kOn : HeatingMode.kOff));
+                this.kManualName, active ? HeatingMode.kOn : HeatingMode.kSchedule));
 
     this.boostService.getCharacteristic(Characteristic.On)
         .onGet(() => this.currentState[this.kBoostName] === HeatingMode.kOn)
